@@ -1,16 +1,16 @@
 <script>
 import axios from 'axios';
 import Card from './Card.vue';
+import Store from '../Store.js';
 
 export default {
     components: {
         Card,
-
     },
     data() {
         return {
-            cards: [],
-            info: {}
+            //cards: [],
+            Store
         }
     },
     methods: {
@@ -20,12 +20,13 @@ export default {
                 .then((res) => {
                     console.log(res.data)
                     console.log(res.data.data)
-                    this.cards = res.data.data
-                    console.log(this.cards)
+                    this.Store.cards = res.data.data
+                    console.log(this.Store)
                 })
         }
     },
     created() {
+        console.log(this.Store)
         this.GetCards()
     },
 }
@@ -47,16 +48,16 @@ export default {
                         <div class="container content-card">
                             <ul class="cards-gid">
                                 <!-- <li class="row card" v-for="card in cards" :key="card.id">
-                                                <img :src="card.card_images[0].image_url" alt="">
-                                                <span class="card-name">
-                                                    {{ card.name }}
-                                                </span>
-                                                <span class="card-archetype">
-                                                    {{ card.archetype }}
-                                                </span>
-                                            </li> -->
+                                                        <img :src="card.card_images[0].image_url" alt="">
+                                                        <span class="card-name">
+                                                            {{ card.name }}
+                                                        </span>
+                                                        <span class="card-archetype">
+                                                            {{ card.archetype }}
+                                                        </span>
+                                                    </li> -->
 
-                                <Card v-for="element in cards" :key="element.id" :card="element"></Card>
+                                <Card v-for="element in Store.cards" :key="element.id" :card="element"></Card>
                             </ul>
                         </div>
                     </div>
