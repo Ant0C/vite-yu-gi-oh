@@ -16,11 +16,13 @@ export default {
     methods: {
         GetCards() {
             console.log('START MOUNTED')
-            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=15&offset=0')
+            axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=39&offset=0')
                 .then((res) => {
                     console.log(res.data)
                     console.log(res.data.data)
                     this.Store.cards = res.data.data
+                    console.log(res.data.meta)
+                    this.Store.meta = res.data.meta
                     console.log(this.Store)
                 })
         }
@@ -37,29 +39,21 @@ export default {
     <main>
         <div class="container">
             <div class="row">
-                <div class="select">
-                    alien
-                </div>
                 <div class="content">
-                    <div class="container">
-                        <div class="content-info">
-                            number
-                        </div>
-                        <div class="container content-card">
-                            <ul class="cards-gid">
-                                <!-- <li class="row card" v-for="card in cards" :key="card.id">
-                                                        <img :src="card.card_images[0].image_url" alt="">
-                                                        <span class="card-name">
-                                                            {{ card.name }}
-                                                        </span>
-                                                        <span class="card-archetype">
-                                                            {{ card.archetype }}
-                                                        </span>
-                                                    </li> -->
+                    <div class="content-card">
+                        <ul class="cards-gid">
+                            <!-- <li class="row card" v-for="card in cards" :key="card.id">
+                                                                                                        <img :src="card.card_images[0].image_url" alt="">
+                                                                                                        <span class="card-name">
+                                                                                                            {{ card.name }}
+                                                                                                        </span>
+                                                                                                        <span class="card-archetype">
+                                                                                                            {{ card.archetype }}
+                                                                                                        </span>
+                                                                                                    </li> -->
 
-                                <Card v-for="element in Store.cards" :key="element.id" :card="element"></Card>
-                            </ul>
-                        </div>
+                            <Card v-for="element in Store.cards" :key="element.id" :card="element"></Card>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -71,27 +65,20 @@ export default {
 @use '../style/general.scss' as *;
 
 main {
-    background-color: burlywood;
-
     .row {
         display: flex;
         flex-direction: column;
     }
-}
 
-.select {
-    padding: 10px;
+    .container {
+        border: solid 2px black;
+    }
+
 }
 
 .content {
-    background-color: white;
+    background-color: #bf5757;
     padding: 20px;
-
-    .content-info {
-        background-color: rgb(36, 35, 35);
-        color: white;
-        padding: 10px;
-    }
 
     .content-card {
         margin-top: 20px;

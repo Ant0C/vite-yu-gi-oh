@@ -1,10 +1,13 @@
 <script>
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
+import NumberCard from './components/NumberCard.vue'
+
 
 export default {
   components: {
     Header,
+    NumberCard,
     Main,
   }
 }
@@ -12,6 +15,7 @@ export default {
 
 <template>
   <Header></Header>
+  <NumberCard></NumberCard>
   <Main></Main>
 </template>
 
