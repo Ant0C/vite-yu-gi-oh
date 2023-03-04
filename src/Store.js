@@ -1,7 +1,9 @@
 import { reactive } from 'vue'
 
-export const Store = reactive({
+const Store = reactive({
     cards: [],
 
 });
+
+export default Store
 
