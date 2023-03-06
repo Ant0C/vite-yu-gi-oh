@@ -4,7 +4,6 @@ import Card from './Card.vue';
 import Store from '../Store.js';
 import Search from './Search.vue';
 
-
 export default {
     components: {
         Card,
@@ -13,30 +12,30 @@ export default {
     data() {
         return {
             //cards: [],
-            Store,
-            GetCards() {
-                console.log('START MOUNTED')
-                const search = this.Store.search
-                console.log('store.search = ', search)
-
-                axios
-                    .get('https://db.ygoprodeck.com/api/v7/cardinfo.php', {
-                        params: {
-                            fname: search,
-                            num: 20,
-                            offset: 0,
-                        }
-                    })
-                    .then((res) => {
-                        console.log(res.data)
-                        console.log(res.data.data)
-                        this.Store.cards = res.data.data
-                        console.log(res.data.meta)
-                        this.Store.meta = res.data.meta
-                        console.log(this.Store)
-                    })
-            }
-
+            Store
+        }
+    },
+    methods: {
+        GetCards() {
+            console.log('START MOUNTED')
+            const search = this.Store.search
+            console.log('store.search = ', search)
+            axios
+                .get('https://db.ygoprodeck.com/api/v7/cardinfo.php', {
+                    params: {
+                        fname: search,
+                        num: 20,
+                        offset: 0,
+                    }
+                })
+                .then((res) => {
+                    console.log(res.data)
+                    console.log(res.data.data)
+                    this.Store.cards = res.data.data
+                    console.log(res.data.meta)
+                    this.Store.meta = res.data.meta
+                    console.log(this.Store)
+                })
         }
     },
     created() {
@@ -56,9 +55,6 @@ export default {
                         <Search @filter="GetCards" />
                         <ul class="cards-gid">
                             <Card v-for="element in Store.cards" :key="element.id" :card="element" />
-                            <div>
-                                {{ Store.search }}
-                            </div>
                         </ul>
                     </div>
                 </div>
